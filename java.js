@@ -5,6 +5,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommissionService {
+    function calculerGains() {
+    const plat = parseFloat(document.getElementById('platPrice').value);
+    const liv = parseFloat(document.getElementById('deliveryPrice').value);
+    
+    // Validation stricte des prix d'El Mourouj
+    if (plat >= 8 && plat <= 30 && liv >= 3 && liv <= 3.5) {
+        const commRestau = plat * 0.15; // 15% de commission
+        const commLiv = liv * 0.10;    // 10% de commission
+        
+        // Mise à jour de l'affichage HTML
+        document.getElementById('restauPart').innerText = (plat - commRestau).toFixed(2);
+        document.getElementById('livreurPart').innerText = (liv - commLiv).toFixed(2);
+        document.getElementById('cowerkersPart').innerText = (commRestau + commLiv).toFixed(2);
+        document.getElementById('results').style.display = 'block';
+    } else {
+        alert('Veuillez entrer des valeurs valides (Plat: 8-30 DT, Livraison: 3-3.5 DT)');
+    }
+}
 
     // Taux de commissions professionnels de Cowerkers
     private static final double TAUX_COMMISSION_RESTAU = 0.15; // 15%
