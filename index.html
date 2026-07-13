@@ -1,0 +1,98 @@
+html_content = """<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cowerkers | Plateforme de Livraison El Mourouj</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">Cowerkers</div>
+        <nav class="nav-links">
+            <a href="#accueil">Accueil</a>
+            <a href="#restaurants">Restaurants</a>
+            <a href="#livreurs">Espace Livreurs</a>
+            <a href="#dashboard">Tableau de Bord</a>
+        </nav>
+        <a href="#commander" class="cta-btn">Commander</a>
+    </header>
+
+    <section id="accueil" class="hero-section">
+        <div class="hero-content">
+            <h1>L'intermédiaire de confiance entre les restaurants d'El Mourouj et les livreurs</h1>
+            <p>Une solution ultra professionnelle pour optimiser vos livraisons, suivre vos gains et commander en toute sécurité. Plats de 8 à 30 DT, livraison de 3 à 3.5 DT.</p>
+            <div class="hero-buttons">
+                <a href="#restaurants" class="btn btn-primary">Espace Restaurant</a>
+                <a href="#livreurs" class="btn btn-secondary">Devenir Livreur</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <h2>Notre Modèle Économique</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>Pour les Restaurants</h3>
+                <p class="price-range">Plats : 8 DT — 30 DT</p>
+                <p>Augmentez votre visibilité à El Mourouj sans vous soucier de la logistique de livraison. Gestion automatique des commandes.</p>
+            </div>
+            <div class="card highlight">
+                <h3>Commission Cowerkers</h3>
+                <p class="price-range">Fixe & Transparent</p>
+                <p>Calcul automatisé en temps réel sur chaque plat et chaque course pour garantir un service continu et sans faute.</p>
+            </div>
+            <div class="card">
+                <h3>Pour les Livreurs</h3>
+                <p class="price-range">Course : 3 DT — 3.5 DT</p>
+                <p>Recevez des notifications instantanées dès qu'une commande est prête et optimisez vos trajets quotidiens.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard" class="simulation-section">
+        <h2>Simulation de Commande en Temps Réel</h2>
+        <div class="sim-box">
+            <div class="input-group">
+                <label for="platPrice">Prix du Plat (DT) :</label>
+                <input type="number" id="platPrice" value="20" min="8" max="30">
+            </div>
+            <div class="input-group">
+                <label for="deliveryPrice">Frais de Livraison (DT) :</label>
+                <input type="number" id="deliveryPrice" value="3.5" min="3" max="3.5" step="0.1">
+            </div>
+            <button onclick="calculerGains()" class="btn btn-primary" style="width:100%; margin-top:10px;">Simuler la Transaction</button>
+            
+            <div class="results-box" id="results" style="display:none; margin-top:20px; padding:15px; background:#eef2f5; border-radius:6px;">
+                <p><strong>Part Restaurant :</strong> <span id="restauPart">0</span> DT</p>
+                <p><strong>Part Livreur :</strong> <span id="livreurPart">0</span> DT</p>
+                <p><strong>Commission Cowerkers :</strong> <span id="cowerkersPart">0</span> DT</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Cowerkers - Conçu par Ahmed Yassine Dridi & Co. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        function calculerGains() {
+            const plat = parseFloat(document.getElementById('platPrice').value);
+            const liv = parseFloat(document.getElementById('deliveryPrice').value);
+            
+            if (plat >= 8 && plat <= 30 && liv >= 3 && liv <= 3.5) {
+                const commRestau = plat * 0.15;
+                const commLiv = liv * 0.10;
+                
+                document.getElementById('restauPart').innerText = (plat - commRestau).toFixed(2);
+                document.getElementById('livreurPart').innerText = (liv - commLiv).toFixed(2);
+                document.getElementById('cowerkersPart').innerText = (commRestau + commLiv).toFixed(2);
+                document.getElementById('results').style.display = 'block';
+            } else {
+                alert('Veuillez entrer des valeurs valides (Plat: 8-30 DT, Livraison: 3-3.5 DT)');
+            }
+        }
+    </script>
+</body>
+</html>
